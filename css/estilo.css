@@ -1,0 +1,29 @@
+#topo img
+{
+    margin: 1%;
+    width: 142px;
+}
+
+#corpo p
+{
+    margin: 1%;
+}
+
+#corpo #cadastro
+{
+    width: 20%;
+    margin: 0 auto;
+}
+
+#corpo #contato
+{
+    width: 20%;
+    margin: 0 auto;
+}
+
+#rodape
+{
+    margin: 1%;
+    font-weight: bold;
+}
+
