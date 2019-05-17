@@ -4,7 +4,22 @@
     width: 142px;
 }
 
-#corpo p
+#menu
+{
+    background-color: #000;
+}
+
+#corpo
+{
+    margin: 1%;
+}
+
+#corpo h1
+{
+    margin: 1%;
+}
+
+#corpo n
 {
     margin: 1%;
 }
@@ -26,4 +41,6 @@
     margin: 1%;
     font-weight: bold;
 }
+
+
 

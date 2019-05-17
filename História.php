@@ -27,10 +27,10 @@
             <div class="navbar navbar-default">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.php">Inicio</a></li>
+                        <li><a href="index.php">Inicio</a></li>
                         <li><a href="Cadastro.php">Cadastro</a></li>
                         <li><a href="Agenda.php">Agendar Horário</a></li>
-                        <li><a href="História.php">Historia</a></li>
+                        <li class="active"><a href="História.php">Historia</a></li>
                         <li><a href="Contato.php">Contato</a></li>
                     </ul>                       
                 </div>             
@@ -38,15 +38,15 @@
         </div>
         
         <div id="corpo">
-            <p>Bem vindo ao site pra dar banho em totó :) cadastre seu bixinho e agende seu horario</p>
+            <h1>Bom dia </h1>
             
         </div>
         
         <div id="rodape">
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <a href="Agenda.php">dias disponiveis?</a>
+            <a id="index" href="#">dias disponiveis?</a>
             <br>
-            <a href="Contato.php">Perguntas?</a>
+            <a id="index" href="#">Perguntas?</a>
         </div>
     </body>
 </html>
