@@ -1,12 +1,17 @@
+body
+{
+    background-image: url("../imagens/toto.png");
+}
+
 #topo img
 {
     margin: 1%;
     width: 142px;
 }
 
-#menu
+.container-fluid
 {
-    background-color: #000;
+/*    background-color: #50483d; */
 }
 
 #corpo
