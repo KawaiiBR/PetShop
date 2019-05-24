@@ -74,15 +74,17 @@ class Usuario
         {
             $conexao = new \PDO("mysql:host=localhost; dbname=petshop", "root", "");
 
-            $sql = "SELECT * FROM usuarios WHERE usuario = :login AND senha = :senha";
+            $sql = "SELECT count(*) FROM usuarios WHERE usuario = :login AND senha = :senha";
             $preparar = $conexao->prepare($sql);
             $preparar->bindValue(":login", $login);
 
             $senhaCriptografada = sha1($senha);
             $preparar->bindValue(":senha", $senhaCriptografada);
+            
+            $preparar->execute();
+            $resultado = $preparar->fetch();
 
-            $resultado = $preparar->execute();
-            if($resultado == true)
+            if($resultado[0] == 1)
             {
                 return true;
             }
@@ -97,7 +99,6 @@ class Usuario
             return false;
         }
     }
-
 }
 
 //teste do metodo Inserir
@@ -105,9 +106,9 @@ class Usuario
 //$resultado = $u->Inserir("Anderson Serrano", "anderson", "ander@anderson.com.br", "1234");
 //echo $resultado;
 
-//teste do metodo Login
+////teste do metodo Login
 //$u = new usuario();
-//$resultado = $u->Login('admin', 'admin');
+//$resultado = $u->Login('123', '123');
 //echo $resultado;
 
 ?>

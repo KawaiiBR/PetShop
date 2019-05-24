@@ -39,7 +39,6 @@
         
         <div id="corpo">
             <p>Bem vindo ao site pra dar banho em totó :) cadastre seu bixinho e agende seu horario</p>
-            
         </div>
         
         <div id="rodape">
