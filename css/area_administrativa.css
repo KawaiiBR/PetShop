@@ -1,0 +1,39 @@
+body
+{
+    background-color: #ccc;
+}
+
+#menu .navbar.navbar-default img
+{
+    float: left;
+    width: 60px;
+}
+
+#rodape
+{
+    position: absolute;
+    bottom: 0;
+    margin: 2% 36%;
+}
+
+#h1
+{
+    margin: 5%;
+}
+
+#corpo .table.table-striped
+{
+    width: 90%;
+    margin: 5%;
+}
+
+#corpo #formNovoUsuario
+{
+    width: 20%;
+    text-align: center;
+    margin: 1% 40%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 2%;
+}
+

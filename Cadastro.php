@@ -45,6 +45,8 @@
                 <input placeholder="email@examplo" type="text">
                 <p>Nome do pet</p>
                 <input placeholder="rodolfinho" type="text">
+                <p>Telefone</p>
+                <input placeholder="(14) 99876-5432" type="text">
                 <p>Senha</p>
                 <input placeholder="*****" type="text">
                 <br>

@@ -47,6 +47,9 @@
             <a href="Agenda.php">dias disponiveis?</a>
             <br>
             <a href="Contato.php">Perguntas?</a>
+            <br>
+            <a href="../PetShop/area_administrativa/Login.php">admin</a>
+            
         </div>
     </body>
 </html>
