@@ -55,6 +55,8 @@
                     <input name="nome" type="text">
                     <p>Hora</p>
                     <input name="nome" type="text">
+                    <br>
+                    <input name="opcao"type="submit" value="ATUALIZAR">
             
             <h1>Agenda</h1>
                     <table class="table table-striped">

@@ -79,7 +79,6 @@
 
                $u = new Cliente();
                $resultado = $u->Agendar($dia, $hora);
-               echo $resultado;
                if($resultado == true)
                {
                    echo "<script type='text/javascript'>"
