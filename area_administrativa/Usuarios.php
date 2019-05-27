@@ -48,7 +48,6 @@
         </div>
         
         <div id="corpo">      
-                <!-- EMMET -->
                 <div id="formNovoUsuario">
                 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                     <h2>Novo usuário</h2>
@@ -81,24 +80,22 @@
                         <td>Usuario</td>
                         <td colspan="2">OPÇOES</td>
                     </tr>
-
-                    <tr>
-                        <td>1</td>
-                        <td>Cesar</td>
-                        <td>cesar@cesar.com</td>
-                        <td>cesar</td>
-                        <td>[editar]</td>
-                        <td>[excluir]</td>
-                    </tr>
-
-                     <tr>
-                        <td>2</td>
-                        <td>Pedro</td>
-                        <td>pedro@pedro.com</td>
-                        <td>pedro</td>
-                        <td>[editar]</td>
-                        <td>[excluir]</td>
-                    </tr>
+                        <?php
+                        $u = new Usuario();
+                        $usuarios = $u->ListarTodos();
+                        
+                        foreach($usuarios as $user) 
+                        {
+                            echo "<tr>"
+                                    ."<td>".$user->id."</td>"
+                                    ."<td>".$user->nome."</td>"
+                                    ."<td>".$user->usuario."</td>"
+                                    ."<td>".$user->email."</td>"
+                                    ."<td><a href='#' class='btn btn-warning'>Editar</a></td>"
+                                    ."<td><a onclick='return confirm(&quot;Tem Certeza?&quot;)' href='?id=".$user->id."&acao=deletar' class='btn btn-danger'>Excluir</a></td>"
+                                ."</tr>";
+                        }
+                        ?>
                     </table>            
         </div>
             <div id="rodape">
@@ -107,6 +104,39 @@
 </html>
 
 <?php
+    if(isset($_GET['id']) && isset($_GET['acao']))
+    {
+        $id = $_GET['id'];
+        $acao = $_GET['acao'];
+            
+        switch ($acao)
+        {
+            case "deletar";
+                    
+                $u = new Usuario();
+                $resultado = $u->Deletar($id);
+                if($resultado == true)
+                {
+                    echo "<script type='text/javascript'>"
+                        ."alert('Excluido');"
+                        ."</script>'";
+
+                    echo "<script type='text/javascript'>"
+                        ."window.location.href='http://localhost/PetShop/area_administrativa/Usuarios.php';"
+                        ."</script>";
+                }
+                else
+                {
+                    echo "<script type='text/javascript'>"
+                    ."alert('Erro ao remover o usuario!');"
+                    ."</script>'";
+                }
+            break;
+                
+            case "editar";
+            break;
+        }
+    }
     if(isset($_POST['id']) &&
             isset($_POST['nome']) &&
             isset($_POST['email']) &&

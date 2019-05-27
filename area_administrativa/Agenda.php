@@ -1,3 +1,8 @@
+<?php
+    namespace PetShop;
+    include '../Classes/Cliente.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,7 +46,40 @@
         </div>
         
         <div id="corpo">
-            <h2>Pagina administrativa</h2>
+            <div id="formNovoUsuario">
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+                    <h2>Novo usuário</h2>
+                    <p>ID</p>
+                    <input name="id" type="text">
+                    <p>Dia</p>
+                    <input name="nome" type="text">
+                    <p>Hora</p>
+                    <input name="nome" type="text">
+            
+            <h1>Agenda</h1>
+                    <table class="table table-striped">
+                    <tr>
+                        <td>ID</td>
+                        <td>DIA</td>
+                        <td>HORA</td>
+                        <td colspan="2">OPÇOES</td>
+                    </tr>
+                        <?php
+                        $u = new Cliente();
+                        $usuarios = $u->ListarTodosAgenda();
+                        
+                        foreach($usuarios as $user) 
+                        {
+                            echo "<tr>"
+                                    ."<td>".$user->id."</td>"
+                                    ."<td>".$user->dia."</td>"
+                                    ."<td>".$user->hora."</td>"
+                                    ."<td><a href='#' class='btn btn-warning'>Editar</a></td>"
+                                    ."<td><a onclick='return confirm(&quot;Tem Certeza?&quot;)' href='?id=".$user->id."&acao=deletar' class='btn btn-danger'>Excluir</a></td>"
+                                ."</tr>";
+                        }
+                        ?>
+                    </table>   
         </div>
         
         <div id="rodape">
@@ -49,3 +87,38 @@
         </div>
     </body>
 </html>
+
+<?php
+    if(isset($_GET['id']) && isset($_GET['acao']))
+        {
+            $id = $_GET['id'];
+            $acao = $_GET['acao'];
+
+            switch ($acao)
+            {
+                case "deletar";
+
+                    $u = new Cliente();
+                    $resultado = $u->DeletarAgenda($id);
+                    if($resultado == true)
+                    {
+                        echo "<script type='text/javascript'>"
+                            ."alert('Excluido');"
+                            ."</script>'";
+
+                        echo "<script type='text/javascript'>"
+                            ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
+                            ."</script>";
+                    }
+                    else
+                    {
+                        echo "<script type='text/javascript'>"
+                        ."alert('Erro ao remover o usuario!');"
+                        ."</script>'";
+                    }
+                break;
+
+                case "editar";
+                break;
+            }
+        }

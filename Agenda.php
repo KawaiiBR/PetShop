@@ -1,3 +1,8 @@
+<?php
+    namespace PetShop;
+    include 'Classes/Cliente.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,9 +43,11 @@
         </div>
         
         <div id="corpo">
-            <p>Dia: <input type="date" id="calendario"/></p>
-            <p>Hora: <input type="time" id="Hora"/></p>
-            <input type="button" value="Agendar"/>
+            <form id="cadastro" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+                <p>Dia: <input name="dia" type="date" id="calendario"/></p>
+                <p>Hora: <input name="hora" type="time" id="Hora"/></p>
+                <input class="btn btn-success" type="submit" value="Agendar">
+            </form>
             
             
         </div>
@@ -53,3 +60,37 @@
         </div>
     </body>
 </html>
+
+<?php
+                if(isset($_POST['dia']) &&
+                isset($_POST['hora']))
+        {
+           if(empty($_POST['dia']) ||
+                   empty($_POST['hora']))
+           {         
+                echo "<script type='text/javascript'>"
+                    ."alert('Não deixe os campos em Branco');"
+                ."</script>'";
+           }
+           else
+           {
+               $dia = $_POST['dia']; 
+               $hora = $_POST['hora'];
+
+               $u = new Cliente();
+               $resultado = $u->Agendar($dia, $hora);
+               echo $resultado;
+               if($resultado == true)
+               {
+                   echo "<script type='text/javascript'>"
+                            ."alert('Agendamento Realizado com Sucesso');"
+                        ."</script>'";
+               }
+               else
+               {
+                    echo "<script type='text/javascript'>"
+                            ."alert('Deu Ruim');"
+                        ."</script>'";
+               }
+           }
+        }

@@ -1,3 +1,8 @@
+<?php
+    namespace PetShop;
+    include 'Classes/Cliente.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,29 +43,71 @@
         </div>
         
         <div id="corpo">
-            <form id="cadastro" action="#" method="GET">
+            <form id="cadastro" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                 <p>Nome Completo</p>
-                <input placeholder="Nome Completo" type="text">
+                <input name="nome" placeholder="Nome Completo" type="text">
                 <p>Email</p>
-                <input placeholder="email@examplo" type="text">
+                <input name="email" placeholder="email@examplo" type="text">
                 <p>Nome do pet</p>
-                <input placeholder="rodolfinho" type="text">
+                <input name="nomepet" placeholder="rodolfinho" type="text">
                 <p>Telefone</p>
-                <input placeholder="(14) 99876-5432" type="text">
+                <input name="telefone" placeholder="(14) 99876-5432" type="text">
                 <p>Senha</p>
-                <input placeholder="*****" type="text">
+                <input name="senha" placeholder="*****" type="text">
                 <br>
                 <input class="btn btn-success" type="submit" value="Cadastrar">
-                <input class="btn btn-danger" type="submit" value="Cancelar">
             </form>
             
         </div>
         
         <div id="rodape">
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <a id="index" href="#">dias disponiveis?</a>
+            <a id="index" href="Agenda.php">dias disponiveis?</a>
             <br>
             <a id="index" href="#">Perguntas?</a>
         </div>
     </body>
 </html>
+
+<?php
+                if(isset($_POST['nome']) &&
+                isset($_POST['email']) &&
+                isset($_POST['nomepet']) &&
+                isset($_POST['telefone']) &&
+                isset($_POST['senha']))
+        {
+           if(empty($_POST['nome']) ||
+                   empty($_POST['email']) ||
+                   empty($_POST['nomepet']) ||
+                   empty($_POST['telefone']) ||
+                   empty($_POST['senha']))
+           {         
+                echo "<script type='text/javascript'>"
+                    ."alert('Não deixe os campos em Branco');"
+                ."</script>'";
+           }
+           else
+           {
+               $id = $_POST['id']; 
+               $nome = $_POST['nome'];
+               $email = $_POST['email'];
+               $usuario = $_POST['usuario'];
+               $senha = $_POST['senha'];
+
+               $u = new Cliente();
+               $resultado = $u->InserirCliente($nome, $email, $nomepet, $telefone, $senha);
+               echo $resultado;
+               if($resultado == true)
+               {
+                   echo "<script type='text/javascript'>"
+                            ."alert('Cadastro Realizado com Sucesso');"
+                        ."</script>'";
+               }
+               else
+               {
+                    echo "<script type='text/javascript'>"
+                            ."alert('Deu Ruim');"
+                        ."</script>'";
+               }
+           }
+        }
