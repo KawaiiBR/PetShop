@@ -1,21 +1,20 @@
-<?php 
+<?php
 
 namespace PetShop;
 
-class Cliente
+class Usuario
 {
-    public function InserirCliente($nome, $email, $nomepet, $telefone, $senha)
+    public function Inserir($nome, $usuario, $email, $senha)
     {
         try
         {
             $conexao = new \PDO("mysql:host=localhost; dbname=petshop", "root", "");
 
-            $sql = "INSERT INTO cliente (nome, email, nomepet, telefone, senha) VALUES (:nome, :email, :nomepet, :telefone, :senha);";
+            $sql = "INSERT INTO usuarios (nome, usuario, email, senha) VALUES (:nome, :usuario, :email, :senha);";
             $preparar = $conexao->prepare($sql);
             $preparar->bindValue(":nome", "$nome");
+            $preparar->bindValue(":usuario", "$usuario");
             $preparar->bindValue(":email", "$email");
-            $preparar->bindValue(":nomepet", "$nomepet");
-            $preparar->bindValue(":telefone", "$telefone");
             $preparar->bindValue(":senha", "$senha");
 
             $resultado = $preparar->execute();
@@ -34,24 +33,28 @@ class Cliente
             return false;
         }
     }
-    
-    public function Agendar($dia, $hora)
+
+    public function Login($login, $senha)
     {
         try
         {
             $conexao = new \PDO("mysql:host=localhost; dbname=petshop", "root", "");
-        
-            $sql = "INSERT INTO agenda (dia, hora) VALUES (:dia, :hora);";
-            $preparar = $conexao->prepare($sql);
-            $preparar->bindValue(":dia", "$dia");
-            $preparar->bindValue(":hora", "$hora");
 
-            $resultado = $preparar->execute();
-            if($resultado == true)
+            $sql = "SELECT count(*) FROM usuarios WHERE usuario = :login AND senha = :senha";
+            $preparar = $conexao->prepare($sql);
+            $preparar->bindValue(":login", $login);
+
+            $senhaCriptografada = sha1($senha);
+            $preparar->bindValue(":senha", $senhaCriptografada);
+            
+            $preparar->execute();
+            $resultado = $preparar->fetch();
+
+            if($resultado[0] == 1)
             {
                 return true;
             }
-            else
+                else
             {
                 return false;
             }
@@ -61,15 +64,14 @@ class Cliente
             throw new Exception("Ocorrou um ERRO: "+$e);
             return false;
         }
-        
     }
     
-    public function ListarTodosAgenda()
+    public function ListarTodos()
     {
         try
         {
             $conexao = new \PDO("mysql:host=localhost; dbname=petshop", "root", "");
-            $sql = "SELECT * FROM agenda";
+            $sql = "SELECT * FROM usuarios";
 
             $preparar = $conexao->prepare($sql);
             $preparar->execute();
@@ -85,10 +87,10 @@ class Cliente
         }
     }
     
-    public function DeletarAgenda($id)
+    public function Deletar($id)
     {
         $conexao = new \PDO("mysql:host=localhost; dbname=petshop", "root", "");
-        $sql = "DELETE FROM agenda WHERE id = :id";
+        $sql = "DELETE FROM usuarios WHERE id = :id";
             
         $preparar = $conexao->prepare($sql);
         $preparar->bindValue(":id", $id);
@@ -102,16 +104,36 @@ class Cliente
             return false;
         }
     }
+    
+    public function Alterar($id, $nome, $usuario, $email, $senha)
+    {
+        try
+        {
+            $conexao = new \PDO("mysql:host=localhost; dbname=petshop", "root", "");
+            $sql = "UPDATE usuarios SET nome = :nome, usuario= :usuario, email = :email, senha = :senha WHERE id = :id";
+
+            $preparar = $conexao->prepare($sql);
+            $preparar->bindValue(":id", $id);
+            $preparar->bindValue(":nome", $nome);
+            $preparar->bindValue(":usuario", $usuario);
+            $preparar->bindValue(":email", $email);
+
+            $senhaCriptografada = sha1($senha);
+            $preparar->bindValue(":senha", $senhaCriptografada);
+
+            $resultado = $preparar->execute();
+            if($resultado == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch(\PDOException $e)
+        {
+            throw new Exception("Ocorrou um ERRO: "+$e->getMessage());
+        }
+    }
 }
-
-//teste do metodo Inserir
-//$u = new usuario();
-//$resultado = $u->Inserir("Anderson Serrano", "anderson", "ander@anderson.com.br", "1234");
-//echo $resultado;
-
-////teste do metodo Login
-//$u = new usuario();
-//$resultado = $u->Login('123', '123');
-//echo $resultado;
-
-?>

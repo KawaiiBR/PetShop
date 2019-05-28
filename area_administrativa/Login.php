@@ -1,6 +1,6 @@
 <?php 
     namespace PetShop;
-    include '../Classes/Cliente.php';
+    include '../Classes/Usuario.php';
 ?>
 
 <!DOCTYPE html>
