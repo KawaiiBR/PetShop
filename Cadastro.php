@@ -87,15 +87,14 @@
            }
            else
            {
-               $id = $_POST['id']; 
                $nome = $_POST['nome'];
                $email = $_POST['email'];
-               $usuario = $_POST['usuario'];
+               $nomepet = $_POST['nomepet'];
+               $telefone= $_POST['telefone'];
                $senha = $_POST['senha'];
 
                $u = new Cliente();
                $resultado = $u->InserirCliente($nome, $email, $nomepet, $telefone, $senha);
-               echo $resultado;
                if($resultado == true)
                {
                    echo "<script type='text/javascript'>"

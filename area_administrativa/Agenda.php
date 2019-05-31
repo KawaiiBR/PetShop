@@ -22,6 +22,27 @@
         
         <!--Estilo-->
         <link href="../css/area_administrativa.css" rel="stylesheet" type="text/css"/>
+        
+        <script type="text/javascript">
+        function Editar(id, dia, hora)
+            {
+                document.getElementsByName('id')[0].value = id;
+                document.getElementsByName('dia')[0].value = dia;
+                document.getElementsByName('hora')[0].value = hora;
+                
+                document.getElementById('agendarBtn').style.display = "none";
+                document.getElementById('atualizarBtn').style.display = "inline";
+            }
+            
+            function Cancelar()
+            {
+                var opcao = confirm("Tem certeza?\nNão há voltas nesta ação");
+                if(opcao === true)
+                {
+                    window.location.reload();
+                }
+            }
+        </script>
     </head>
     <body>
         <div id="topo">
@@ -47,7 +68,7 @@
         
         <div id="corpo">
             <div id="formNovoUsuario">
-                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="GET">
                     <h2>Novo usuário</h2>
                     <p>ID</p>
                     <input name="id" type="text">
@@ -57,7 +78,8 @@
                     <input name="hora" type="time">
                     <br>
                     <br>
-                    <input class="btn btn-primary" name="opcao" type="submit" value="Atualizar">
+                    <input id="agendarBtn" class="btn btn-primary" name="opcao" type="submit" value="Agendar">
+                    <input id="atualizarBtn" style="display: none;" class="btn btn-warning" name="opcao" type="submit" value="Atualizar">
             
             <h1>Agenda</h1>
                     <table class="table table-striped">
@@ -68,17 +90,19 @@
                         <td colspan="2">OPÇOES</td>
                     </tr>
                         <?php
-                        $u = new Cliente();
-                        $usuarios = $u->ListarTodosAgenda();
+                        $c = new Cliente();
+                        $clientes = $c->ListarTodosAgenda();
                         
-                        foreach($usuarios as $user) 
+                        foreach($clientes as $user) 
                         {
-                            $dia = date('d/m/Y H:i:s', strtotime($user->agenda));
+                            $dia = date('Y-m-d', strtotime($user->agenda));
+                            $hora = date('H:i:s', strtotime($user->agenda));
                             echo "<tr>"
                                     ."<td>".$user->id."</td>"
                                     ."<td>".$dia."</td>"
-                                    ."<td><a onclick='Editar(&quot;".$user->id."&quot;, &quot;".$user->agenda."&quot;);' href='#' class='btn btn-warning'>Editar</a></td>"
-                                    ."<td><a onclick='return confirm(&quot;Tem Certeza?&quot;)' href='?id=".$user->id."&acao=deletar' class='btn btn-danger'>Excluir</a></td>"
+                                    ."<td>".$hora."</td>"
+                                    ."<td><a onclick='Editar(&quot;".$user->id."&quot;, &quot;".$dia."&quot;, &quot;".$hora."&quot;);' href='#' class='btn btn-warning'>Editar</a></td>"
+                                    ."<td><a onclick='return confirm(&quot;Tem Certeza?&quot;)' href='?id=".$user->id."&opcao=Deletar' class='btn btn-danger'>Excluir</a></td>"
                                 ."</tr>";
                         }
                         ?>
@@ -94,50 +118,89 @@
 <?php
 
     $dia = date('d/m/Y', strtotime($dia));
-    if(isset($_GET['id']) && isset($_GET['acao']))
+    if(isset($_GET['id']) && isset($_GET['opcao']) && isset($_GET['dia']) && isset($_GET['hora']))
         {
-            $id = $_GET['id'];
-            $acao = $_GET['acao'];
-
-            switch ($acao)
+            if(empty($_GET['dia']) || empty($_GET['hora']))            
             {
-                case "deletar";
-
-                    $u = new Cliente();
-                    $resultado = $u->DeletarAgenda($id);
+                echo "<script type='text/javascript'>"
+                        ."alert('Não deixe os campos em branco');"
+                        ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
+                        ."</script>'";
+            }
+            else
+            {
+                $id = $_GET['id'];
+                $dia = $_GET['dia'];
+                $hora = $_GET['hora'];
+                $opcao = $_GET['opcao'];
+                
+                $c = new Cliente();
+                
+                switch ($opcao)
+                {
+                    Case "Atualizar";
+                    $agenda = "$dia $hora";    
+                    $resultado = $c->AlterarAgenda($id, $agenda);
                     if($resultado == true)
                     {
                         echo "<script type='text/javascript'>"
-                            ."alert('Excluido');"
+                                ."alert('Alterado com sucesso');"
+                                ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
                             ."</script>'";
-
-                        echo "<script type='text/javascript'>"
-                            ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
-                            ."</script>";
                     }
                     else
                     {
                         echo "<script type='text/javascript'>"
-                        ."alert('Erro ao remover o usuario!');"
-                        ."</script>'";
+                                ."alert('Erro ao alterar o usuario!');"
+                            ."</script>'";
                     }
-                break;
+                    Break; 
+                    
+                    case "Deletar";
+                        
+                        
+                        Break;
 
-                Case "Atualizar";
-                $resultado = $u->A($id, $agenda);
-                if($resultado == 1)
-                {
-                    echo "<script type='text/javascript'>"
-                            ."alert('Alterado com sucesso');"
-                            ."window.location.href='http://localhost/PetShop/area_administrativa/Usuarios.php';"
-                        ."</script>'";
+                    case "Agendar";
+                        $resultado = $c->Agendar($dia, $hora);
+                        if($resultado == true)
+                        {
+                            echo "<script type='text/javascript'>"
+                                    ."alert('Agendamento Realizado com Sucesso');"
+                                    ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
+                                ."</script>'";
+                                }
+                            else
+                            {
+                                echo "<script type='text/javascript'>"
+                                        ."alert('Erro');"
+                                    ."</script>'";
+                            }
+                        Break;
                 }
-                else
-                {
-                    echo "<script type='text/javascript'>"
-                            ."alert('Erro ao alterar o usuario!');"
-                        ."</script>'";
-                }
-                Break; 
             }
         }
+else if(isset($_GET['id']) && isset($_GET['opcao']))
+{
+    if($_GET['opcao'] == "Deletar")
+    {
+        $id = $_GET['id'];
+        $c = new Cliente();
+        $resultado = $c->DeletarAgenda($id);
+
+        if($resultado == 1)
+        {
+            echo "<script type='text/javascript'>"
+                ."alert('Excluido');"
+                ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
+                ."</script>'";
+        }
+        else
+        {
+            echo "<script type='text/javascript'>"
+                ."alert('Erro ao excluir o agendamento!');"
+                ."window.location.href='http://localhost/PetShop/area_administrativa/Agenda.php';"
+                ."</script>'";
+        }
+    }
+}
