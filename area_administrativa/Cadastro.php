@@ -31,7 +31,7 @@
                         <li><a href="index.php">Inicio</a></li>
                         <li  class="active"><a href="Cadastro.php">Cadastro</a></li>
                         <li><a href="Agenda.php">Agendar Horário</a></li>
-                        <li><a href="História.php">Historia</a></li>
+                        <li><a href="Historia.php">Historia</a></li>
                         <li><a href="Contato.php">Contato</a></li>
                         <li><a href="Usuarios.php">Usuários</a></li>
                         <li><a href="../index.php">Sair</a></li>

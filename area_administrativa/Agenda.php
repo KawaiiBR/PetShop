@@ -36,7 +36,7 @@
                         <li><a href="index.php">Inicio</a></li>
                         <li><a href="Cadastro.php">Cadastro</a></li>
                         <li class="active"><a href="Agenda.php">Agendar Horário</a></li>
-                        <li><a href="História.php">Historia</a></li>
+                        <li><a href="Historia.php">Historia</a></li>
                         <li><a href="Contato.php">Contato</a></li>
                         <li><a href="Usuarios.php">Usuários</a></li>
                         <li><a href="../index.php">Sair</a></li>
@@ -52,11 +52,12 @@
                     <p>ID</p>
                     <input name="id" type="text">
                     <p>Dia</p>
-                    <input name="nome" type="text">
+                    <input name="dia" type="date">
                     <p>Hora</p>
-                    <input name="nome" type="text">
+                    <input name="hora" type="time">
                     <br>
-                    <input name="opcao"type="submit" value="ATUALIZAR">
+                    <br>
+                    <input class="btn btn-primary" name="opcao" type="submit" value="Atualizar">
             
             <h1>Agenda</h1>
                     <table class="table table-striped">
@@ -72,11 +73,11 @@
                         
                         foreach($usuarios as $user) 
                         {
+                            $dia = date('d/m/Y H:i:s', strtotime($user->agenda));
                             echo "<tr>"
                                     ."<td>".$user->id."</td>"
-                                    ."<td>".$user->dia."</td>"
-                                    ."<td>".$user->hora."</td>"
-                                    ."<td><a href='#' class='btn btn-warning'>Editar</a></td>"
+                                    ."<td>".$dia."</td>"
+                                    ."<td><a onclick='Editar(&quot;".$user->id."&quot;, &quot;".$user->agenda."&quot;);' href='#' class='btn btn-warning'>Editar</a></td>"
                                     ."<td><a onclick='return confirm(&quot;Tem Certeza?&quot;)' href='?id=".$user->id."&acao=deletar' class='btn btn-danger'>Excluir</a></td>"
                                 ."</tr>";
                         }
@@ -91,6 +92,8 @@
 </html>
 
 <?php
+
+    $dia = date('d/m/Y', strtotime($dia));
     if(isset($_GET['id']) && isset($_GET['acao']))
         {
             $id = $_GET['id'];
@@ -120,7 +123,21 @@
                     }
                 break;
 
-                case "editar";
-                break;
+                Case "Atualizar";
+                $resultado = $u->A($id, $agenda);
+                if($resultado == 1)
+                {
+                    echo "<script type='text/javascript'>"
+                            ."alert('Alterado com sucesso');"
+                            ."window.location.href='http://localhost/PetShop/area_administrativa/Usuarios.php';"
+                        ."</script>'";
+                }
+                else
+                {
+                    echo "<script type='text/javascript'>"
+                            ."alert('Erro ao alterar o usuario!');"
+                        ."</script>'";
+                }
+                Break; 
             }
         }

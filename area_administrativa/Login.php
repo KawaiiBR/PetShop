@@ -17,15 +17,13 @@
         <link href="../CSS/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
         
         <!-- MEU CSS -->
-        <link href="../CSS/EstiloPublico.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/area_administrativa.css" rel="stylesheet" type="text/css"/>
         
         <!-- Font Awesome-->
         <link href="../CSS/all.min.css" rel="stylesheet" type="text/css"/>
         <script src="../JS/all.min.js" type="text/javascript"></script>
-        
-        <link href="../css/area_administrativa.css" rel="stylesheet" type="text/css"/>
     </head>
-        <body>
+        <body style="margin: 15% 0% 0% -8%; text-align: center;">
             <div id="login">
                 <form action="#" method="POST">
                     <h1>Área Administrativa</h1>

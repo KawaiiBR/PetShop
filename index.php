@@ -38,11 +38,10 @@
         </div>
         
         <div id="corpo">
-            <p>Bem vindo ao site pra dar banho em totó :) cadastre seu bixinho e agende seu horario</p>
+            <p>Bem vindo a um site pra dar banho no seu pet :) cadastre seu bixinho e agende seu horário</p>
         </div>
         
         <div id="rodape">
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <a href="Agenda.php">dias disponiveis?</a>
             <br>
             <a href="Contato.php">Perguntas?</a>

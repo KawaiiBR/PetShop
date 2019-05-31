@@ -16,7 +16,8 @@ body
 
 #corpo
 {
-    margin: 1%;
+    margin: 1% 0% 0% -6%;
+    text-align: center;
 }
 
 #corpo h1
@@ -43,7 +44,14 @@ body
 
 #rodape
 {
+    position: absolute;
+    bottom: 0;
     color: grey;
     margin: 1%;
     font-weight: bold;
+}
+
+#login
+{
+    margin: 21% 0% 0% 36%;
 }

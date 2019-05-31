@@ -44,8 +44,8 @@
         
         <div id="corpo">
             <form id="cadastro" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-                <p>Dia: <input name="dia" type="date" id="calendario"/></p>
-                <p>Hora: <input name="hora" type="time" id="Hora"/></p>
+                <p>Dia: <input name="dia" type="date" id="dia">
+                <p>Hora: <input name="hora" type="time" id="hora"/></p>
                 <input class="btn btn-success" type="submit" value="Agendar">
             </form>
             
@@ -53,7 +53,7 @@
         </div>
         
         <div id="rodape">
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
             <a href="Agenda.php">dias disponiveis?</a>
             <br>
             <a href="Contato.php">Perguntas?</a>
@@ -62,8 +62,8 @@
 </html>
 
 <?php
-                if(isset($_POST['dia']) &&
-                isset($_POST['hora']))
+        if(isset($_POST['dia']) &&
+        isset($_POST['hora']))
         {
            if(empty($_POST['dia']) ||
                    empty($_POST['hora']))
@@ -74,22 +74,40 @@
            }
            else
            {
-               $dia = $_POST['dia']; 
-               $hora = $_POST['hora'];
-
-               $u = new Cliente();
-               $resultado = $u->Agendar($dia, $hora);
-               if($resultado == true)
-               {
-                   echo "<script type='text/javascript'>"
-                            ."alert('Agendamento Realizado com Sucesso');"
-                        ."</script>'";
-               }
-               else
-               {
-                    echo "<script type='text/javascript'>"
-                            ."alert('Deu Ruim');"
-                        ."</script>'";
-               }
-           }
+                    $dia = $_POST['dia']; 
+                    $hora = $_POST['hora'];
+                    
+                    $validaDia = date("D", strtotime($dia));
+                    
+                    //validação de dia da semana
+                    if($validaDia == "Sun" || $validaDia == "Sat")
+                    {
+                        echo "<script type='text/javascript'>"
+                                ."alert('Nao trabalhamos aos sabados e domingos');"
+                            ."</script>'";
+                    }
+                    else if ($hora <= "10:00" || $hora >= "22:00")
+                    {
+                        echo "<script type='text/javascript'>"
+                                ."alert('Somente trabalhamos das 10:00 as 22:00 por favor se encaixe nesse horário');"
+                            ."</script>'";
+                    }
+                    else
+                    {
+                        $u = new Cliente();
+                        $resultado = $u->Agendar($dia, $hora);
+                        if($resultado == true)
+                        {
+                            echo "<script type='text/javascript'>"
+                                     ."alert('Seu agendamento ficou para: $dia as $hora');"
+                                 ."</script>'";
+                        }
+                        else
+                        {
+                             echo "<script type='text/javascript'>"
+                                     ."alert('Deu Ruim');"
+                                 ."</script>'";
+                        }
+                    }
+                }
         }

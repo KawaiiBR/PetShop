@@ -61,7 +61,6 @@
         </div>
         
         <div id="rodape">
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <a id="index" href="Agenda.php">dias disponiveis?</a>
             <br>
             <a id="index" href="#">Perguntas?</a>
