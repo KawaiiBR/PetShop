@@ -36,7 +36,6 @@
                         <li class="active"><a href="Cadastro.php">Cadastro</a></li>
                         <li><a href="Agenda.php">Agendar Horário</a></li>
                         <li><a href="História.php">Historia</a></li>
-                        <li><a href="Contato.php">Contato</a></li>
                     </ul>                       
                 </div>             
             </div>
@@ -62,8 +61,6 @@
         
         <div id="rodape">
             <a id="index" href="Agenda.php">dias disponiveis?</a>
-            <br>
-            <a id="index" href="#">Perguntas?</a>
         </div>
     </body>
 </html>

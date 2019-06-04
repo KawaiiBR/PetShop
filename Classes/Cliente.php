@@ -197,14 +197,29 @@ class Cliente
     }
 }
 
-//teste do metodo Inserir
-//$u = new usuario();
-//$resultado = $u->Inserir("Anderson Serrano", "anderson", "ander@anderson.com.br", "1234");
+//teste do metodo InserirCliente
+//$c = new Cliente();
+//$resultado = $c->InserirCliente("Anderson Serrano", "ander@anderson.com.br", "anderson", "1234", "123");
 //echo $resultado;
 
-////teste do metodo Login
-//$u = new usuario();
-//$resultado = $u->Login('123', '123');
+//Teste do metodo ListarTodosCliente
+//$c = new Cliente();
+//$resultado = $c->ListarTodosCliente();
+
+//Teste do metodo AlterarCliente
+//$c = new Cliente();
+//$resultado = $c->AlterarCliente(1, 'teste', 'teste', 'teste', 'teste');
 //echo $resultado;
 
-?>
+//Teste do metodo DeletarCliente
+//$c = new Cliente();
+//$resultado = $c->DeletarCliente(1);
+
+//teste do metodo Agendar
+//$c = new Cliente();
+//$resultado = $c->Agendar("2019-06-04", "15:58");
+//echo $resultado;
+
+//Teste do metodo ListarTodosAgenda
+//$c = new Cliente();
+//$resultado = $c->ListarTodosAgenda();
