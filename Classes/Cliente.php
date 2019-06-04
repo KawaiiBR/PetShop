@@ -223,3 +223,12 @@ class Cliente
 //Teste do metodo ListarTodosAgenda
 //$c = new Cliente();
 //$resultado = $c->ListarTodosAgenda();
+
+//Teste do metodo AlterarAgenda
+//$c = new Cliente();
+//$resultado = $c->AlterarAgenda(1, '2019-06-04', '15:53')
+//echo $resultado;
+
+//Teste do metodo DeletarAgenda
+//$c = new Cliente();
+//$resultado = $c->DeletarAgenda(1);

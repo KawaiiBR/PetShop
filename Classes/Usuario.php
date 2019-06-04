@@ -137,3 +137,27 @@ class Usuario
         }
     }
 }
+
+//teste do metodo Inserir
+//$u = new usuario();
+//$resultado = $u->Inserir("Anderson Serrano", "anderson", "ander@anderson.com.br", "1234");
+//echo $resultado;
+
+//teste do metodo Login
+//$u = new usuario();
+//$resultado = $u->Login('admin', 'admin');
+//echo $resultado;
+
+
+//Teuste do metodo ListarTodos
+//$u = new Usuario();
+//$resultado = $u->ListarTodos();
+
+//Teste do metodo Deletar
+//$u = new Usuario();
+//$resultado = $u->Deletar(26);
+
+//Teste do metodo Alterar
+//$u = new Usuario();
+//$resultado = $u->Alterar(29, 'teste', 'teste', 'teste', 'teste');
+//echo $resultado;

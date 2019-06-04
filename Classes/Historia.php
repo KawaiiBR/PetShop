@@ -54,8 +54,12 @@
         }
     }
     
-//    Teste Atualizar
+//    Teste AtualizarHistoria
 //    $h = new historia();
-//    $resultado = $h->AtualizarHistoria('olaaa');
+//    $resultado = $h->AtualizarHistoria('Teste Historia');
 //    echo $resultado;
+    
+//    Teste do método ListarHistoria
+//    $h = new Historia();
+//    $resultado = $c->ListarHistoria();
 
