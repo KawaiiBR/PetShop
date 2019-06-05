@@ -16,7 +16,9 @@ class Cliente
             $preparar->bindValue(":email", "$email");
             $preparar->bindValue(":nomepet", "$nomepet");
             $preparar->bindValue(":telefone", "$telefone");
-            $preparar->bindValue(":senha", "$senha");
+            
+            $senhaCriptografada = sha1($senha);
+            $preparar->bindValue(":senha", $senhaCriptografada);
 
             $resultado = $preparar->execute();
             if($resultado == true)
@@ -160,7 +162,9 @@ class Cliente
             $preparar->bindValue(":email", $email);
             $preparar->bindValue(":nomepet", $nomepet);
             $preparar->bindValue(":telefone", $telefone);
-            $preparar->bindValue(":senha", $senha);
+            
+            $senhaCriptografada = sha1($senha);
+            $preparar->bindValue(":senha", $senhaCriptografada);
 
             $resultado = $preparar->execute();
             if($resultado == true)

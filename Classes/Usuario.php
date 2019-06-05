@@ -15,7 +15,9 @@ class Usuario
             $preparar->bindValue(":nome", "$nome");
             $preparar->bindValue(":usuario", "$usuario");
             $preparar->bindValue(":email", "$email");
-            $preparar->bindValue(":senha", "$senha");
+            
+            $senhaCriptografada = sha1($senha);
+            $preparar->bindValue(":senha", $senhaCriptografada);
 
             $resultado = $preparar->execute();
             if($resultado == true)
